@@ -6,10 +6,58 @@ const LazyAntdMentions = React.lazy(() => import(/* webpackChunkName: "data_entr
 /**
  * 提及组件AntdMentions
  */
-const AntdMentions = (props) => {
+const AntdMentions = ({
+    id,
+    className,
+    style,
+    popupClassName,
+    key,
+    name,
+    autoSize = false,
+    prefix = '@',
+    value,
+    defaultValue,
+    placement = 'bottom',
+    bordered = true,
+    variant,
+    placeholder,
+    options,
+    disabled = false,
+    status,
+    autoFocus = false,
+    popupContainer,
+    setProps,
+    batchPropsNames = [],
+    ...others
+}) => {
     return (
         <Suspense fallback={null}>
-            <LazyAntdMentions {...props} />
+            <LazyAntdMentions {
+                ...{
+                    id,
+                    className,
+                    style,
+                    popupClassName,
+                    key,
+                    name,
+                    autoSize,
+                    prefix,
+                    value,
+                    defaultValue,
+                    placement,
+                    bordered,
+                    variant,
+                    placeholder,
+                    options,
+                    disabled,
+                    status,
+                    autoFocus,
+                    popupContainer,
+                    setProps,
+                    batchPropsNames,
+                    ...others
+                }
+            } />
         </Suspense>
     );
 }
@@ -122,9 +170,9 @@ AntdMentions.propTypes = {
     bordered: PropTypes.bool,
 
     /**
-     * 形态变体类型，可选项有`'outlined'`、`'borderless'`、`'filled'`，其中`'outlined'`等价于`bordered=True`，但优先级更高
+     * 形态变体类型，可选项有`'outlined'`、`'borderless'`、`'filled'`、`'underlined'`，其中`'outlined'`等价于`bordered=True`，但优先级更高
      */
-    variant: PropTypes.oneOf(['outlined', 'borderless', 'filled']),
+    variant: PropTypes.oneOf(['outlined', 'borderless', 'filled', 'underlined']),
 
     /**
      * 输入框占位文字内容
@@ -168,39 +216,12 @@ AntdMentions.propTypes = {
      */
     'aria-*': PropTypes.string,
 
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
-
     /**
      * Dash-assigned callback that should be called to report property changes
      * to Dash, to make them available for callbacks.
      */
     setProps: PropTypes.func
 };
-
-// 设置默认参数
-AntdMentions.defaultProps = {
-    autoSize: false,
-    prefix: '@',
-    placement: 'bottom',
-    bordered: true,
-    disabled: false,
-    autoFocus: false,
-    selectedOptions: [],
-    batchPropsNames: []
-}
 
 export default AntdMentions;
 

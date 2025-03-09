@@ -11,25 +11,26 @@ import useCss from '../../hooks/useCss';
 /**
  * 通知提醒框组件AntdNotification
  */
-const AntdNotification = (props) => {
-    let {
-        className,
-        style,
-        message,
-        description,
-        type,
-        placement,
-        top,
-        bottom,
-        duration,
-        closable,
-        closeButton,
-        underCompatibilityMode,
-        loading_state,
-        setProps
-    } = props;
+const AntdNotification = ({
+    className,
+    style,
+    message,
+    description,
+    type = 'default',
+    placement = 'topRight',
+    top = 24,
+    bottom = 24,
+    duration = 4.5,
+    showProgress = false,
+    pauseOnHover = true,
+    closable = true,
+    closeButton,
+    stack = false,
+    underCompatibilityMode,
+    setProps
+}) => {
 
-    const [api, contextHolder] = notification.useNotification({ stack: false });
+    const [api, contextHolder] = notification.useNotification({ stack: stack });
     const { notification: _notification } = App.useApp();
 
     let config = {
@@ -45,6 +46,8 @@ const AntdNotification = (props) => {
         top: top,
         bottom: bottom,
         duration: duration,
+        showProgress: showProgress,
+        pauseOnHover: pauseOnHover,
         closeIcon: (
             closable ?
                 undefined :
@@ -92,7 +95,6 @@ const AntdNotification = (props) => {
     return <>{contextHolder}</>;
 }
 
-// 定义参数或属性
 AntdNotification.propTypes = {
     /**
      * 组件唯一id
@@ -158,6 +160,18 @@ AntdNotification.propTypes = {
     duration: PropTypes.number,
 
     /**
+     * 是否显示自动关闭进度条
+     * 默认值：`false`
+     */
+    showProgress: PropTypes.bool,
+
+    /**
+     * `showProgress=True`时，是否在鼠标移入时暂停进度条倒计时
+     * 默认值：`true`
+     */
+    pauseOnHover: PropTypes.bool,
+
+    /**
      * 是否显示关闭按钮
      * 默认值：`true`
      */
@@ -192,24 +206,15 @@ AntdNotification.propTypes = {
     }),
 
     /**
+     * 是否开启多通知自动折叠堆叠功能
+     * 默认值：`false`
+     */
+    stack: PropTypes.bool,
+
+    /**
      * 当前通知提醒框组件是否位于设置了`compatibilityMode=true`的`AntdConfigProvider`内部
      */
     underCompatibilityMode: PropTypes.bool,
-
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
 
     /**
      * Dash-assigned callback that should be called to report property changes
@@ -217,15 +222,5 @@ AntdNotification.propTypes = {
      */
     setProps: PropTypes.func,
 };
-
-// 设置默认参数
-AntdNotification.defaultProps = {
-    type: 'default',
-    placement: 'topRight',
-    top: 24,
-    bottom: 24,
-    duration: 4.5,
-    closable: true
-}
 
 export default AntdNotification;

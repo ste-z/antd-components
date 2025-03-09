@@ -6,10 +6,50 @@ const LazyAntdSegmented = React.lazy(() => import(/* webpackChunkName: "data_dis
 /**
  * 分段控制器组件AntdSegmented
  */
-const AntdSegmented = (props) => {
+const AntdSegmented = ({
+    id,
+    style,
+    className,
+    key,
+    options,
+    defaultValue,
+    value,
+    block = false,
+    shape = 'default',
+    vertical = false,
+    disabled = false,
+    size = 'middle',
+    setProps,
+    persistence,
+    persisted_props,
+    persistence_type,
+    batchPropsNames = [],
+    ...others
+}) => {
     return (
         <Suspense fallback={null}>
-            <LazyAntdSegmented {...props} />
+            <LazyAntdSegmented {
+                ...{
+                    id,
+                    style,
+                    className,
+                    key,
+                    options,
+                    defaultValue,
+                    value,
+                    block,
+                    shape,
+                    vertical,
+                    disabled,
+                    size,
+                    setProps,
+                    persistence,
+                    persisted_props,
+                    persistence_type,
+                    batchPropsNames,
+                    ...others
+                }
+            } />
         </Suspense>
     );
 }
@@ -94,6 +134,12 @@ AntdSegmented.propTypes = {
     block: PropTypes.bool,
 
     /**
+     * 形状，可选项有`'default'`、`'round'`
+     * 默认值：`'default'`
+     */
+    shape: PropTypes.oneOf(['default', 'round']),
+
+    /**
      * 是否垂直展示
      * 默认值：`false`
      */
@@ -174,15 +220,9 @@ AntdSegmented.propTypes = {
     persistence_type: PropTypes.oneOf(['local', 'session', 'memory'])
 };
 
-// 设置默认参数
-AntdSegmented.defaultProps = {
-    block: false,
-    vertical: false,
-    disabled: false,
-    size: 'middle',
+AntdSegmented.dashPersistence = {
     persisted_props: ['value'],
-    persistence_type: 'local',
-    batchPropsNames: []
+    persistence_type: 'local'
 }
 
 export default AntdSegmented;

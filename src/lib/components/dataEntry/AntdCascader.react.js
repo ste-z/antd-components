@@ -6,10 +6,90 @@ const LazyAntdCascader = React.lazy(() => import(/* webpackChunkName: "data_entr
 /**
  * 级联选择组件AntdCascader
  */
-const AntdCascader = (props) => {
+const AntdCascader = ({
+    id,
+    style,
+    className,
+    popupClassName,
+    key,
+    name,
+    locale = 'zh-cn',
+    options,
+    optionFilterProp = 'label',
+    panelMode = false,
+    optionsNodeKeyToLabel,
+    optionsMode = 'tree',
+    changeOnSelect = false,
+    size,
+    bordered = true,
+    variant,
+    disabled = false,
+    placeholder,
+    defaultValue,
+    value,
+    placement = 'bottomLeft',
+    maxTagCount,
+    multiple = false,
+    expandTrigger = 'click',
+    status,
+    allowClear = true,
+    autoFocus = false,
+    showCheckedStrategy,
+    popupContainer = 'body',
+    prefix,
+    suffixIcon,
+    readOnly,
+    setProps,
+    persistence,
+    persisted_props,
+    persistence_type,
+    batchPropsNames = [],
+    ...others
+}) => {
     return (
         <Suspense fallback={null}>
-            <LazyAntdCascader {...props} />
+            <LazyAntdCascader {
+                ...{
+                    id,
+                    style,
+                    className,
+                    popupClassName,
+                    key,
+                    name,
+                    locale,
+                    options,
+                    optionFilterProp,
+                    panelMode,
+                    optionsNodeKeyToLabel,
+                    optionsMode,
+                    changeOnSelect,
+                    size,
+                    bordered,
+                    variant,
+                    disabled,
+                    placeholder,
+                    defaultValue,
+                    value,
+                    placement,
+                    maxTagCount,
+                    multiple,
+                    expandTrigger,
+                    status,
+                    allowClear,
+                    autoFocus,
+                    showCheckedStrategy,
+                    popupContainer,
+                    prefix,
+                    suffixIcon,
+                    readOnly,
+                    setProps,
+                    persistence,
+                    persisted_props,
+                    persistence_type,
+                    batchPropsNames,
+                    ...others
+                }
+            } />
         </Suspense>
     );
 }
@@ -170,9 +250,9 @@ AntdCascader.propTypes = {
     bordered: PropTypes.bool,
 
     /**
-     * 形态变体类型，可选项有`'outlined'`、`'borderless'`、`'filled'`，其中`'outlined'`等价于`bordered=True`，但优先级更高
+     * 形态变体类型，可选项有`'outlined'`、`'borderless'`、`'filled'`、`'underlined'`，其中`'outlined'`等价于`bordered=True`，但优先级更高
      */
-    variant: PropTypes.oneOf(['outlined', 'borderless', 'filled']),
+    variant: PropTypes.oneOf(['outlined', 'borderless', 'filled', 'underlined']),
 
     /**
      * 输入框占位文字内容
@@ -309,21 +389,6 @@ AntdCascader.propTypes = {
      */
     'aria-*': PropTypes.string,
 
-    loading_state: PropTypes.shape({
-        /**
-         * Determines if the component is loading or not
-         */
-        is_loading: PropTypes.bool,
-        /**
-         * Holds which property is loading
-         */
-        prop_name: PropTypes.string,
-        /**
-         * Holds the name of the component that is loading
-         */
-        component_name: PropTypes.string
-    }),
-
     /**
      * Dash-assigned callback that should be called to report property changes
      * to Dash, to make them available for callbacks.
@@ -352,24 +417,9 @@ AntdCascader.propTypes = {
     persistence_type: PropTypes.oneOf(['local', 'session', 'memory'])
 };
 
-// 设置默认参数
-AntdCascader.defaultProps = {
-    optionFilterProp: 'label',
-    panelMode: false,
-    changeOnSelect: false,
-    placement: 'bottomLeft',
-    multiple: false,
-    expandTrigger: 'click',
-    allowClear: true,
-    autoFocus: false,
-    locale: 'zh-cn',
-    optionsMode: 'tree',
-    popupContainer: 'body',
-    bordered: true,
-    disabled: false,
+AntdCascader.dashPersistence = {
     persisted_props: ['value'],
-    persistence_type: 'local',
-    batchPropsNames: []
+    persistence_type: 'local'
 }
 
 export default AntdCascader;

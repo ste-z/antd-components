@@ -6,10 +6,86 @@ const LazyAntdTimePicker = React.lazy(() => import(/* webpackChunkName: "data_en
 /**
  * 时间选择组件AntdTimePicker
  */
-const AntdTimePicker = (props) => {
+const AntdTimePicker = ({
+    id,
+    className,
+    style,
+    popupClassName,
+    key,
+    name,
+    locale = 'zh-cn',
+    setProps,
+    disabled = false,
+    hourStep = 1,
+    minuteStep = 1,
+    secondStep = 1,
+    format = 'HH:mm:ss',
+    value,
+    defaultValue,
+    use12Hours = false,
+    allowClear = true,
+    autoFocus = false,
+    placeholder,
+    placement = 'bottomLeft',
+    bordered = true,
+    variant,
+    size = 'middle',
+    status,
+    popupContainer = 'body',
+    readOnly,
+    extraFooter,
+    showNow = true,
+    prefix,
+    suffixIcon,
+    persistence,
+    persisted_props,
+    persistence_type,
+    batchPropsNames = [],
+    needConfirm = false,
+    ...others
+}) => {
     return (
         <Suspense fallback={null}>
-            <LazyAntdTimePicker {...props} />
+            <LazyAntdTimePicker {
+                ...{
+                    id,
+                    className,
+                    style,
+                    popupClassName,
+                    key,
+                    name,
+                    locale,
+                    setProps,
+                    disabled,
+                    hourStep,
+                    minuteStep,
+                    secondStep,
+                    format,
+                    value,
+                    defaultValue,
+                    use12Hours,
+                    allowClear,
+                    autoFocus,
+                    placeholder,
+                    placement,
+                    bordered,
+                    variant,
+                    size,
+                    status,
+                    popupContainer,
+                    readOnly,
+                    extraFooter,
+                    showNow,
+                    prefix,
+                    suffixIcon,
+                    persistence,
+                    persisted_props,
+                    persistence_type,
+                    batchPropsNames,
+                    needConfirm,
+                    ...others
+                }
+            } />
         </Suspense>
     );
 }
@@ -103,9 +179,9 @@ AntdTimePicker.propTypes = {
     bordered: PropTypes.bool,
 
     /**
-     * 形态变体类型，可选项有`'outlined'`、`'borderless'`、`'filled'`，其中`'outlined'`等价于`bordered=True`，但优先级更高
+     * 形态变体类型，可选项有`'outlined'`、`'borderless'`、`'filled'`、`'underlined'`，其中`'outlined'`等价于`bordered=True`，但优先级更高
      */
-    variant: PropTypes.oneOf(['outlined', 'borderless', 'filled']),
+    variant: PropTypes.oneOf(['outlined', 'borderless', 'filled', 'underlined']),
 
     /**
      * 输入框占位文字内容
@@ -250,26 +326,9 @@ AntdTimePicker.propTypes = {
     persistence_type: PropTypes.oneOf(['local', 'session', 'memory'])
 };
 
-// 设置默认参数
-AntdTimePicker.defaultProps = {
-    hourStep: 1,
-    minuteStep: 1,
-    secondStep: 1,
-    use12Hours: false,
-    disabled: false,
-    placement: 'bottomLeft',
-    format: 'HH:mm:ss',
-    allowClear: true,
-    autoFocus: false,
-    bordered: true,
-    size: 'middle',
-    showNow: true,
-    needConfirm: false,
+AntdTimePicker.dashPersistence = {
     persisted_props: ['value'],
-    persistence_type: 'local',
-    locale: 'zh-cn',
-    popupContainer: 'body',
-    batchPropsNames: []
+    persistence_type: 'local'
 }
 
 export default AntdTimePicker;

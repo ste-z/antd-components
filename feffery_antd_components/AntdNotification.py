@@ -1,6 +1,13 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+import typing  # noqa: F401
+import numbers # noqa: F401
+from typing_extensions import TypedDict, NotRequired, Literal # noqa: F401
 from dash.development.base_component import Component, _explicitize_args
+try:
+    from dash.development.base_component import ComponentType # noqa: F401
+except ImportError:
+    ComponentType = typing.TypeVar("ComponentType", bound=Component)
 
 
 class AntdNotification(Component):
@@ -44,6 +51,12 @@ Keyword arguments:
 - duration (number; default 4.5):
     通知从显示到自动消失的时长，单位：秒，当传入`None`时会一直显示  默认值：`4.5`.
 
+- showProgress (boolean; default False):
+    是否显示自动关闭进度条  默认值：`False`.
+
+- pauseOnHover (boolean; default True):
+    `showProgress=True`时，是否在鼠标移入时暂停进度条倒计时  默认值：`True`.
+
 - closable (boolean; default True):
     是否显示关闭按钮  默认值：`True`.
 
@@ -68,30 +81,51 @@ Keyword arguments:
     - danger (boolean; optional):
         按钮是否呈现危险状态  默认值：`False`.
 
+- stack (boolean; default False):
+    是否开启多通知自动折叠堆叠功能  默认值：`False`.
+
 - underCompatibilityMode (boolean; optional):
-    当前通知提醒框组件是否位于设置了`compatibilityMode=True`的`AntdConfigProvider`内部.
-
-- loading_state (dict; optional)
-
-    `loading_state` is a dict with keys:
-
-    - is_loading (boolean; optional):
-        Determines if the component is loading or not.
-
-    - prop_name (string; optional):
-        Holds which property is loading.
-
-    - component_name (string; optional):
-        Holds the name of the component that is loading."""
+    当前通知提醒框组件是否位于设置了`compatibilityMode=True`的`AntdConfigProvider`内部."""
     _children_props = []
     _base_nodes = ['children']
     _namespace = 'feffery_antd_components'
     _type = 'AntdNotification'
+    CloseButton = TypedDict(
+        "CloseButton",
+            {
+            "content": NotRequired[str],
+            "style": NotRequired[dict],
+            "className": NotRequired[str],
+            "type": NotRequired[Literal["default", "primary", "ghost", "dashed", "link", "text"]],
+            "danger": NotRequired[bool]
+        }
+    )
+
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, key=Component.UNDEFINED, style=Component.UNDEFINED, className=Component.UNDEFINED, message=Component.UNDEFINED, description=Component.UNDEFINED, type=Component.UNDEFINED, placement=Component.UNDEFINED, top=Component.UNDEFINED, bottom=Component.UNDEFINED, duration=Component.UNDEFINED, closable=Component.UNDEFINED, closeButton=Component.UNDEFINED, underCompatibilityMode=Component.UNDEFINED, loading_state=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'key', 'style', 'className', 'message', 'description', 'type', 'placement', 'top', 'bottom', 'duration', 'closable', 'closeButton', 'underCompatibilityMode', 'loading_state']
+    def __init__(
+        self,
+        id: typing.Optional[typing.Union[str, dict]] = None,
+        key: typing.Optional[str] = None,
+        style: typing.Optional[dict] = None,
+        className: typing.Optional[typing.Union[str, dict]] = None,
+        message: typing.Optional[str] = None,
+        description: typing.Optional[str] = None,
+        type: typing.Optional[Literal["default", "success", "error", "info", "warning"]] = None,
+        placement: typing.Optional[Literal["top", "bottom", "topLeft", "topRight", "bottomLeft", "bottomRight"]] = None,
+        top: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        bottom: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        duration: typing.Optional[typing.Union[int, float, numbers.Number]] = None,
+        showProgress: typing.Optional[bool] = None,
+        pauseOnHover: typing.Optional[bool] = None,
+        closable: typing.Optional[bool] = None,
+        closeButton: typing.Optional["CloseButton"] = None,
+        stack: typing.Optional[bool] = None,
+        underCompatibilityMode: typing.Optional[bool] = None,
+        **kwargs
+    ):
+        self._prop_names = ['id', 'key', 'style', 'className', 'message', 'description', 'type', 'placement', 'top', 'bottom', 'duration', 'showProgress', 'pauseOnHover', 'closable', 'closeButton', 'stack', 'underCompatibilityMode']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'key', 'style', 'className', 'message', 'description', 'type', 'placement', 'top', 'bottom', 'duration', 'closable', 'closeButton', 'underCompatibilityMode', 'loading_state']
+        self.available_properties = ['id', 'key', 'style', 'className', 'message', 'description', 'type', 'placement', 'top', 'bottom', 'duration', 'showProgress', 'pauseOnHover', 'closable', 'closeButton', 'stack', 'underCompatibilityMode']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()
